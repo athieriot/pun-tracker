@@ -1,7 +1,38 @@
-@(message: String)
+@(puns: List[Pun])
 
-@main("Welcome to Play 2.1") {
-    
-    @play20.welcome(message)
-    
+@main("Pun Trackr") {
+
+    @if(puns.isEmpty) {
+        <div class="alert">
+            <strong>Hmmm!</strong> Nothing yet.
+        </div>
+    } else {
+        @for(p <- puns) {
+            <li>@p.description</li>
+
+            <h2>Pun: <em>@p.description</em></h2>
+            <!--ul>
+                <c:forEach items='${indexedActivity.value}' var='employeeActivities'>
+                    <li>
+                        <c:out value='${employeeActivities.key.completeName}' />
+                        <ul>
+                            <c:forEach items='${employeeActivities.value}' var="activities">
+                                <li>client: <c:out value='${activities.key.name}' />
+                                    <ul>
+                                        <c:forEach items='${activities.value}' var="activity">
+                                            <fmt:formatDate value='${activity.day}' pattern='dd/MM/yyyy' var='date' />
+                                            <li><c:out value='${date}' /></li>
+                                            <li><c:out value='${activity.rate} EUR' /></li>
+                                            <li><a href="<c:url value='/activities/${activity.id}/delete' />">
+                                                <i class="icon-trash"></i>Delete
+                                            </a></li>
+                                        </c:forEach>
+                                    </ul>
+                            </c:forEach>
+                        </ul>
+                    </li>
+                </c:forEach>
+            </ul-->
+        }
+    }
 }

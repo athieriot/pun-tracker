@@ -1,0 +1,18 @@
+.after-icon {
+    padding-left: 16px;
+}
+blockquote {
+    margin-top: 1em;
+    margin-left:1em;
+    font-style: oblique;
+}
+blockquote small {
+    font-style: normal;
+}
+.form-invalid {
+    display:inline-block;
+    margin-left:0.5em;
+}
+.small {
+    font-size: small;
+}

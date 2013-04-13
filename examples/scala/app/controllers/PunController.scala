@@ -54,7 +54,7 @@ object PunController extends Controller {
   def delete(id: Int) = Action { implicit request =>
     DB.withTransaction { implicit session =>
 
-      //findById(id).delete
+      Puns.findById(id).delete
 
       Redirect(routes.Application.index())
     }

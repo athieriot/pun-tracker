@@ -14,10 +14,7 @@ object Puns extends Table[Pun]("puns") {
 
   // Utility methods
   def findById(id: Int) = {
-    for {
-      id <- Parameters[Int]
-      p <- Puns if p.id is id
-    } yield p
+    for (p <- Puns if p.id is id) yield p
   }
 
   def findAll = {

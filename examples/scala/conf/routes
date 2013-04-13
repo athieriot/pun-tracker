@@ -7,6 +7,7 @@ GET     /                           controllers.Application.index
 GET     /pun                        controllers.PunController.index
 POST    /pun/add                    controllers.PunController.submit
 GET     /pun/:id/delete             controllers.PunController.delete(id: Int)
+
 GET     /image/:path                controllers.ImageController.index(path: String)
 
 # Map static resources from the /public folder to the /assets URL path

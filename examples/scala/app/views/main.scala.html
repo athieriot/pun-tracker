@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String)(quote: Html)(content: Html)
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="track the best puns">
     <meta name="author" content="Aurélien Thieriot">
+
+    @common.scripts()
     @common.styles()
 </head>
 <body>
@@ -20,7 +22,7 @@
             <div class="hero-unit">
                 <h1>@title</h1>
                 <blockquote>
-                    <p>Pun Trackr will revolutionize the pun-guin industry. <span class="muted small">(not)</span></p>
+                    @quote
                 </blockquote>
             </div>
             @content

@@ -13,9 +13,10 @@ Such as:
 
 - A core language
 - Access to a database
-- View rendering via template
+- View rendering via templates
 - File uploading
-- User interaction with server access
+- Forms with dates
+- In general, user interaction with server access
 
 - Authentication?
 

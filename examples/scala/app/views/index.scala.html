@@ -1,19 +1,30 @@
 @(puns: List[Pun])
 
 @main("Pun Trackr") {
+    <p>Pun Trackr will revolutionize the pun-guin industry. <span class="muted small">(not)</span></p>
+} {
 
     @if(puns.isEmpty) {
         <div class="alert">
             <strong>Hmmm!</strong> Nothing yet.
         </div>
     } else {
-        @for(p <- puns) {
-            <div>Pun: <em>@p.description</em>
-                (<a href="@routes.PunController.delete(p.id.get)">
-                <i class="icon-trash"></i>Delete
-                </a>)
-                <img src="@routes.ImageController.index(p.imagePath.getOrElse(""))">
-            </div>
-        }
+        <table class="table table-striped">
+            @for(p <- puns) {
+            <tr>
+                <td>
+                    Texte:<br /> <em>@p.description</em>
+                </td>
+                <td>
+                    <img class="thumbnail" src="@routes.ImageController.index(p.imagePath.getOrElse("default"))">
+                </td>
+                <td>
+                    <a href="@routes.PunController.delete(p.id.get)">
+                        <i class="icon-trash"></i>Delete
+                    </a>
+                </td>
+            </tr>
+            }
+        </table>
     }
 }

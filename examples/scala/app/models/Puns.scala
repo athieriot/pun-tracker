@@ -11,4 +11,16 @@ object Puns extends Table[Pun]("puns") {
 
   // Every table needs a * projection with the same type as the table's type parameter
   def * = id.? ~ description ~ imagePath.? <> (Pun, Pun.unapply _)
+
+  // Utility methods
+  def findById(id: Int) = {
+    for {
+      id <- Parameters[Int]
+      p <- Puns if p.id is id
+    } yield p
+  }
+
+  def findAll = {
+    for (p <- Puns) yield p
+  }
 }

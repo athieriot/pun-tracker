@@ -3,6 +3,8 @@
 @import helper.twitterBootstrap._
 
 @main("Add puns") {
+    <p>Add a pun in your breakfast. </p><small>Anonymous</small>
+} {
 
     @if(!flash.get("message").isEmpty) {
         <div class="alert alert-success">@flash.get("message").getOrElse("")</div>
@@ -11,11 +13,18 @@
         <div class="alert alert-error">@flash.get("message").getOrElse("")</div>
     }
 
-    @helper.form(action = routes.PunController.submit, 'enctype -> "multipart/form-data") {
-        @helper.inputText(punForm("description"))
+    @helper.form(action = routes.PunController.submit, 'enctype -> "multipart/form-data", 'class -> "well") {
+        @helper.textarea(punForm("description"), 'class -> "control-group", 'rows -> 3, 'cols -> 50)
 
-        <input type="file" name="picture">
+        <div class="fileupload fileupload-new" data-provides="fileupload">
+            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" /></div>
+            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+            <div>
+                <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="image" /></span>
+                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+            </div>
+        </div>
 
-        <input type="submit" class="btn btn-primary" value="Add">
+        <input type="submit" class="form-actions btn btn-primary" value="Add">
     }
 }

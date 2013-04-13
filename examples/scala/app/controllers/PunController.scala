@@ -14,14 +14,18 @@ import scala.slick.jdbc._
 import models.Puns
 import models.Pun
 
+import java.io.File
+import play.api.mvc.MultipartFormData.FilePart
+import play.api.libs.Files.TemporaryFile
+
 object PunController extends Controller {
 
   lazy val punForm = Form(
     mapping(
       "description" -> text
     )
-      ((description) => Pun(None, description, None))
-      ((pun: Pun) => Some(pun.description))
+    ((description) => Pun(None, description, None))
+    ((pun: Pun) => Some(pun.description))
   )
 
   def index = Action { implicit request =>
@@ -33,26 +37,15 @@ object PunController extends Controller {
 
       punForm.bindFromRequest.fold(
         formWithErrors => BadRequest(views.html.addPun(formWithErrors)),
-        value => {
 
-          if(!request.body.file("picture").isEmpty) {
-            request.body.file("picture").map { picture =>
-              import java.io.File
-              val filename = picture.filename
-              val contentType = picture.contentType
-              picture.ref.moveTo(new File("/tmp/" + filename))
+        value => { ImageController.handleUploadedFile(request.body.file("image"),
+          Unit => Redirect(routes.PunController.index).flashing("error" -> "Image upload impossible"),
 
-              Puns.insert(Pun(None, value.description, Some(picture.filename)))
-
-              Redirect(routes.PunController.index).flashing("message" -> "Your Pun is a success !")
-            }.getOrElse {
-              Redirect(routes.PunController.index).flashing("error" -> "Image upload impossible")
-            }
-          } else {
-            Puns.insert(Pun(None, value.description, None))
+          path => {
+            Puns.insert(Pun(None, value.description, path))
 
             Redirect(routes.PunController.index).flashing("message" -> "Your Pun is a success !")
-          }
+          })
         }
       )
     }
@@ -61,12 +54,6 @@ object PunController extends Controller {
   def delete(id: Int) = Action { implicit request =>
     DB.withTransaction { implicit session =>
 
-      val findById = for {
-        id <- Parameters[Int]
-        p <- Puns if p.id is id
-      } yield p
-
-      //To implement
       //findById(id).delete
 
       Redirect(routes.Application.index())

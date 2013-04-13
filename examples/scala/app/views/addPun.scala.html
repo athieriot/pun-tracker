@@ -1,0 +1,21 @@
+@(punForm: Form[Pun])(implicit flash: Flash)
+
+@import helper.twitterBootstrap._
+
+@main("Add puns") {
+
+    @if(!flash.get("message").isEmpty) {
+        <div class="alert alert-success">@flash.get("message").getOrElse("")</div>
+    }
+    @if(!flash.get("error").isEmpty) {
+        <div class="alert alert-error">@flash.get("message").getOrElse("")</div>
+    }
+
+    @helper.form(action = routes.PunController.submit, 'enctype -> "multipart/form-data") {
+        @helper.inputText(punForm("description"))
+
+        <input type="file" name="picture">
+
+        <input type="submit" class="btn btn-primary" value="Add">
+    }
+}

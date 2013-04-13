@@ -15,8 +15,6 @@ object Application extends Controller {
 
   def index = Action {
     DB.withTransaction { implicit session =>
-      //Ugly
-      Puns.insert(Pun(None, "kdjfdkjg"))
 
       var puns = for (p <- Puns) yield p
 

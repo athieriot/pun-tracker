@@ -22,7 +22,7 @@ object PunController extends Controller {
 
   lazy val punForm = Form(
     mapping(
-      "description" -> text
+      "description" -> nonEmptyText
     )
     ((description) => Pun(None, description, None))
     ((pun: Pun) => Some(pun.description))
@@ -54,7 +54,18 @@ object PunController extends Controller {
   def delete(id: Int) = Action { implicit request =>
     DB.withTransaction { implicit session =>
 
-      Puns.findById(id).delete
+      //Todo: Have to fix this "bug"
+      //Puns.findById(id).delete
+
+      Redirect(routes.Application.index())
+    }
+  }
+
+  def upVote(id: Int, upVote: Int) = Action { implicit request =>
+    DB.withTransaction { implicit session =>
+
+      val currentRate = Puns.findByIdWithRating(id)
+      currentRate.update(currentRate.first + upVote)
 
       Redirect(routes.Application.index())
     }

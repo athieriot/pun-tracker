@@ -42,6 +42,9 @@ Current examples
   <tr>
     <td>Scala</td><td>Play 2</td><td>H2 In Memory</td>
   </tr>
+  <tr>
+    <td>Ruby</td><td>Rails3</td><td>SQLite</td>
+  </tr>
 </table>
 
 Ideas

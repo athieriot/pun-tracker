@@ -14,13 +14,13 @@ Such as:
 - A core language
 - Access to a database
 - View rendering via templates
-- Forms with dates and some validation
+- Forms validation
 - File uploading
 - In general, any user interaction should access the server
 
 - Unit tests
-- And functionals?
 
+- And functionals?
 - Authentication?
 
 The Application

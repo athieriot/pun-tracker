@@ -1,0 +1,32 @@
+<% if @puns.empty? %>
+<div class="alert">
+    <strong>Hmmm!</strong> Nothing yet.
+</div>
+<% else %>
+
+  <table class="table table-striped">
+  <% @puns.each do |pun| %>
+      <tr>
+          <td>
+              Texte:<br /> <em><%= pun.description %></em>
+          </td>
+          <td>
+              <img class="thumbnail" src="@routes.ImageController.index(p.imagePath.getOrElse("default"))">
+          </td>
+          <td>
+              <div>
+                  <a href="@routes.PunController.upVote(p.id.get, 1)"><i class="icon-chevron-up"></i></a>
+                  <a href="@routes.PunController.upVote(p.id.get, -1)"><i class="icon-chevron-down"></i></a>
+
+                  @if(p.rating > 0) { <span class="badge badge-success">@p.rating</span>
+                  } else { <span class="badge badge-warning">@p.rating</span> }
+              </div>
+
+              <br />
+              <a href="@routes.PunController.delete(p.id.get)">
+                  <i class="icon-trash"></i>Delete
+              </a>
+          </td>
+      </tr>
+  <% end %>
+<% end %>

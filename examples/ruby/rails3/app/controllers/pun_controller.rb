@@ -1,0 +1,4 @@
+class PunController < ApplicationController
+
+
+end

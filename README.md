@@ -11,6 +11,8 @@ Concept
 The Pun Tracker application should stay minimalistic but cover enough piece of a backend stack.
 Such as:
 
+__Current__
+
 - A core language
 - Access to a database
 - View rendering via templates
@@ -18,10 +20,17 @@ Such as:
 - File uploading
 - In general, any user interaction should access the server
 
-- Unit tests
+__next__
 
-- And functionals?
-- Authentication?
+- Pagination
+- Unit tests
+- Authentication
+
+__future__
+
+- And functionals test?
+- Deployement?
+- Special assets (Coffee, SASS)
 
 The Application
 ===============
@@ -30,6 +39,7 @@ Pun Tracker can contain three pages:
 
 - The index page should display Puns, let users delete them and vote for their favourite
 - A page that let you submit Puns. A simple text ond an image.
+
 - A page that let you create a __User__ (Or modify your profile) 
 
 Current examples
@@ -46,6 +56,11 @@ Current examples
     <td>Ruby</td><td>Rails3</td><td>SQLite</td>
   </tr>
 </table>
+
+Bugs
+====
+
+- Play2: Slick don't like the "delete" keyword
 
 Ideas
 =====

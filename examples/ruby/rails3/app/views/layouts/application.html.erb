@@ -7,15 +7,8 @@
   <meta name="description" content="track the best puns">
   <meta name="author" content="Aurélien Thieriot">
 
-  <%= stylesheet_link_tag    "bootstrap", :media => "all" %>
-  <%= stylesheet_link_tag    "bootstrap-responsive", :media => "all" %>
-  <%= stylesheet_link_tag    "jasny-bootstrap.min", :media => "all" %>
-  <%= stylesheet_link_tag    "jasny-bootstrap-responsive.min", :media => "all" %>
-  <%= stylesheet_link_tag    "custom", :media => "all" %>
-  <%= stylesheet_link_tag    "pun", :media => "all" %>
-
-  <%= javascript_include_tag "jquery-1.9.0.min" %>
-  <%= javascript_include_tag "bootstrap.min" %>
+  <%= render 'common/styles' %>
+  <%= render 'common/scripts' %>
 
   <%= csrf_meta_tags %>
 </head>
@@ -23,16 +16,7 @@
 
 <div class="container-fluid">
 
-    <div class="navbar">
-        <div class="navbar-inner">
-            <a class="brand" href="<%= url_for(:controller => 'application', :action => 'index') %>">Pun Trackr</a>
-            <ul class="nav nav-pills">
-                <!--<li><a href="@routes.PunController.index">Add Puns</a></li>-->
-                <!--li><a href="<c:url value='/activities/new' />">Activity administration</a></li-->
-                </ul-->
-        </div>
-    </div>
-
+    <%= render 'common/nav' %>
 
     <div class="row-fluid">
         <div class="offset1 span10">

@@ -1,4 +1,0 @@
-class PunController < ApplicationController
-
-
-end

@@ -18,14 +18,15 @@
                   <a href="@routes.PunController.upVote(p.id.get, 1)"><i class="icon-chevron-up"></i></a>
                   <a href="@routes.PunController.upVote(p.id.get, -1)"><i class="icon-chevron-down"></i></a>
 
-                  @if(p.rating > 0) { <span class="badge badge-success">@p.rating</span>
-                  } else { <span class="badge badge-warning">@p.rating</span> }
+                  <% if pun.rating.to_i > 0 %>
+                    <span class="badge badge-success"><%= pun.rating %></span>
+                  <% else %>
+                    <span class="badge badge-warning"><%= pun.rating %></span>
+                  <% end %>
               </div>
 
               <br />
-              <a href="@routes.PunController.delete(p.id.get)">
-                  <i class="icon-trash"></i>Delete
-              </a>
+              <i class="icon-trash"></i><%= link_to "Delete", pun_path(pun.id), :method => :delete %>
           </td>
       </tr>
   <% end %>

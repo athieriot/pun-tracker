@@ -11,22 +11,22 @@
               Texte:<br /> <em><%= pun.description %></em>
           </td>
           <td>
-              <img class="thumbnail" src="@routes.ImageController.index(p.imagePath.getOrElse("default"))">
+              <img class="thumbnail" src="img/default.png">
           </td>
           <td>
               <div>
-                  <a href="@routes.PunController.upVote(p.id.get, 1)"><i class="icon-chevron-up"></i></a>
-                  <a href="@routes.PunController.upVote(p.id.get, -1)"><i class="icon-chevron-down"></i></a>
+                <%= link_to up_vote_pun_path(:id => pun.id, :rate => 1), :method => :post do %> <i class="icon-chevron-up"></i> <% end %>
+                <%= link_to up_vote_pun_path(:id => pun.id, :rate => -1), :method => :post do %> <i class="icon-chevron-down"></i> <% end %>
 
-                  <% if pun.rating.to_i > 0 %>
-                    <span class="badge badge-success"><%= pun.rating %></span>
-                  <% else %>
-                    <span class="badge badge-warning"><%= pun.rating %></span>
-                  <% end %>
+                <% if pun.rating.to_i > 0 %>
+                  <span class="badge badge-success"><%= pun.rating %></span>
+                <% else %>
+                  <span class="badge badge-warning"><%= pun.rating %></span>
+                <% end %>
               </div>
 
               <br />
-              <i class="icon-trash"></i><%= link_to "Delete", pun_path(pun.id), :method => :delete %>
+            <%= link_to "Delete", pun_path(pun.id), :method => :delete %> <i class="icon-trash">
           </td>
       </tr>
   <% end %>

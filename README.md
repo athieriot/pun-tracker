@@ -65,4 +65,6 @@ Bugs
 Ideas
 =====
 
+Making CasperJS tests to valid implementation of everything
+
 Same thing for API and command line tools

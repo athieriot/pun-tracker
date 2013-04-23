@@ -25,6 +25,16 @@ class PunsController < ApplicationController
     end
   end
 
+  def up_vote
+    @pun = Pun.find(params[:id])
+
+    respond_to do |format|
+      @pun.update_attribute('rating', @pun.rating + params[:rate].to_i)
+
+      format.html  { redirect_to :controller => "application", :action => "index" }
+    end
+  end
+
   def destroy
     @pun = Pun.find(params[:id])
     @pun.destroy

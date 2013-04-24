@@ -3,7 +3,7 @@ EmptyListMessage = "Hmmm! Nothing yet."
 AddPunsId = "add-puns"
 AddPunsTitle = "Add puns"
 
-casper.start casper.cli.get("address"), () ->
+casper.start casper.cli.get("server"), () ->
   @test.assertTitle HomepageTitle, 'The application must have an homepage (title=' + HomepageTitle + ')'
   @test.assertDoesntExist 'tr', 'By default, no Puns are displayed'
   @test.assertTextExists EmptyListMessage, 'Instead, a message is present (text=' + EmptyListMessage + ')'   

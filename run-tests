@@ -1,3 +1,41 @@
 #!/bin/bash 
 
-casperjs test tests/* --address="http://localhost:9000"
+usage()
+{
+cat << EOF
+usage: $0 options
+
+This script run a CasperJS test suite over a Pun Trackr examples
+
+OPTIONS:
+   -h      Show this message
+   -s      Server address
+   -v      Verbose
+EOF
+}
+
+SERVER="localhost:9000"
+VERBOSE=false
+
+while getopts “hs:v” OPTION
+do
+     case $OPTION in
+         h)
+             usage
+             exit 1
+             ;;
+         s)
+             SERVER=$OPTARG
+             ;;
+         v)
+             VERBOSE=1
+             ;;
+         ?)
+             usage
+             exit
+             ;;
+     esac
+done
+
+echo $SERVER
+casperjs test tests/* --server="http://"$SERVER

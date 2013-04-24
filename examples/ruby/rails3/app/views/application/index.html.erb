@@ -11,7 +11,7 @@
               Texte:<br /> <em><%= pun.description %></em>
           </td>
           <td>
-              <img class="thumbnail" src="img/default.png">
+              <img class="thumbnail" src=<% if pun.image.blank? %> "img/default.png" <% else %> "<%= pun.image.url %>" <% end %>>
           </td>
           <td>
               <div>

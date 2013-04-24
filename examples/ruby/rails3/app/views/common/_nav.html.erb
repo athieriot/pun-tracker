@@ -2,7 +2,7 @@
     <div class="navbar-inner">
         <%= link_to "Pun Trackr", {:controller => "application", :action => "index"}, :class => "brand" %>
         <ul class="nav nav-pills">
-            <li><%= link_to "Add Puns", new_pun_path %></li>
+            <li><%= link_to "Add Puns", new_pun_path, :id => 'add-puns'  %></li>
         </ul>
     </div>
 </div>

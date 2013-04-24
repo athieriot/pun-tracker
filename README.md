@@ -62,6 +62,21 @@ Bugs
 
 - Play2: Slick don't like the "delete" keyword
 
+Hacking
+=======
+
+If you want to add your own implementation of Pun Trackr in your favourite language, it's simple.
+(And much appreciated ^^)
+
+First, make sure your favourite framework is not already in the list.
+If it's the case, feel free to propose improvements!
+
+If not:
+   - create a new branch (It will make the Pull Request easier)
+   - Have fun
+   - Validate your application against the Casper suite by running ./run-tests -s server_address
+   - Push your code and create a Pull Request!
+
 Ideas
 =====
 

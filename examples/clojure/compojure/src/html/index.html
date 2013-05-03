@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Pun Tracker</title>
+
+        <link rel="stylesheet" type="text/css" href="../../resources/public/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="../../resources/public/css/default.css" />
+    </head>
+    <body>
+        <div class="container">
+
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <a href="/" class="brand">Pun Tracker</a>
+                    <ul class="nav">
+                        <li>
+                            <a href="/create">Add Pun</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content">
+
+                <div class="row index-content">
+                    <div class="span12">
+
+                        <h2>Puns</h2>
+
+                        <ul class="puns">
+                            <li>
+                                <a href="#" class="delete">
+                                    Delete
+                                </a>
+                                <div class="body">
+                                    Pun Here
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div class="row create-content">
+                    <div class="span8">
+
+                        <h2>Add a Pun</h2>
+
+                        <form class="form-horizontal" method="post" action="/create">
+
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Pun:
+                                </label>
+                                <div class="controls">
+                                    <input type="text" name="body" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Image:
+                                </label>
+                                <div class="controls">
+                                    <input type="file" name="image" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input type="submit" value="Add Pun" class="btn btn-primary" />
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </body>
+</html>

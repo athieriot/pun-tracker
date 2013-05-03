@@ -44,8 +44,6 @@
     (create-content
       (get-in req [:params :body]))))
 
-(index {})
-
 (defn index [req]
   (layout
     (index-content

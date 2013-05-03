@@ -1,7 +1,6 @@
 
 (ns pun-tracker.web
   (:use compojure.core
-        net.cgrand.enlive-html
         [ring.middleware.reload :only [wrap-reload]]
         [ring.middleware.stacktrace :only [wrap-stacktrace]]
         [ring.adapter.jetty :only [run-jetty]])

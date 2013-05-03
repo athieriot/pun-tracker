@@ -11,7 +11,15 @@
     padding: 10px;
 }
 
-.puns .delete {
+.puns .actions {
     float: right;
+}
+
+/*======== design preview =========*/
+
+.design .row {
+    border-top: 2px #222 solid;
+    margin: 40px 0 40px -20px;
+    padding: 20px 0 20px 0;
 }
 

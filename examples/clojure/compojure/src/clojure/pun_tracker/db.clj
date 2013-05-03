@@ -1,6 +1,7 @@
 
 (ns pun-tracker.db
-  (:use [datomic.api :only [q db] :as d]))
+  (:use [datomic.api :only [q db] :as d])
+  (:require [pun-tracker.util :as util]))
 
 (def uri "datomic:mem://puntracker")
 
@@ -29,7 +30,12 @@
     :db/ident :user/email
     :db/valueType :db.type/string
     :db/cardinality :db.cardinality/one
-    :db.install/_attribute :db.part/db}])
+    :db.install/_attribute :db.part/db}
+   {:db/id #db/id [:db.part/db]
+    :db/ident :user/password
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db.install/_attribute :db.part/db} ])
 
 (def find-puns-tx
   '[:find ?e
@@ -44,8 +50,23 @@
     :in $ % ?text
     :where (pun-matches ?text ?e)])
 
+(def find-user-tx
+  '[:find ?e
+    :in $ ?email ?pass
+    :where [?e :user/email ?email]
+           [?e :user/password ?pass]])
+
 ;; Public
 ;; ------
+
+(defn user
+  "Find a user by email and password"
+  [email pass]
+  (let [res (q find-user-tx
+               (db @cnn)
+               email
+               (util/md5 pass))]
+    (ffirst res)))
 
 (defn puns []
   (q find-puns-tx

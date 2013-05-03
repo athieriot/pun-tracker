@@ -8,20 +8,26 @@
         <link rel="stylesheet" type="text/css" href="../../resources/public/css/default.css" />
     </head>
     <body>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <a href="/" class="brand">Pun Tracker</a>
+                <ul class="nav">
+                    <li>
+                        <a href="/create">Add Pun</a>
+                    </li>
+                    <li>
+                        <a href="/register">Register</a>
+                    </li>
+                    <li>
+                        <a href="/login">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
         <div class="container">
 
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <a href="/" class="brand">Pun Tracker</a>
-                    <ul class="nav">
-                        <li>
-                            <a href="/create">Add Pun</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="content">
+            <div class="design">
 
                 <div class="row index-content">
                     <div class="span12">
@@ -30,9 +36,15 @@
 
                         <ul class="puns">
                             <li>
-                                <a href="#" class="delete">
-                                    Delete
-                                </a>
+                            <div class="actions">
+                                    <a href="#" class="vote">
+                                        Vote
+                                    </a>
+                                    /
+                                    <a href="#" class="delete">
+                                        Delete
+                                    </a>
+                                </div>
                                 <div class="body">
                                     Pun Here
                                 </div>
@@ -70,6 +82,88 @@
                             <div class="control-group">
                                 <div class="controls">
                                     <input type="submit" value="Add Pun" class="btn btn-primary" />
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="row login-content">
+                    <div class="span8">
+
+                        <h2>Logging In</h2>
+
+                        <p>If you have an account then enter your details below to log in.</p>
+
+                        <form class="form-horizontal" method="post" action="/login">
+
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Email:
+                                </label>
+                                <div class="controls">
+                                    <input type="text" name="email" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Password:
+                                </label>
+                                <div class="controls">
+                                    <input type="password" name="password" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input type="submit" value="Login" class="btn btn-primary" />
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                    <div class="span4">
+                        <h2>Signing Up!</h2>
+                        <p>If you don't have an account then
+                            you won't be able to vote, so sign up now!</p>
+                    </div>
+                </div>
+
+                <div class="row register-content">
+                    <div class="span12">
+
+                        <h2>Registering an Account</h2>
+
+                        <p>To register an account just fill in the form below.</p>
+
+                        <form class="form-horizontal" method="post" action="/register">
+
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Email:
+                                </label>
+                                <div class="controls">
+                                    <input type="text" name="email" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Password:
+                                </label>
+                                <div class="controls">
+                                    <input type="password" name="password" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input type="submit" value="Create Account" class="btn btn-primary" />
                                 </div>
                             </div>
 

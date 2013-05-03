@@ -22,7 +22,7 @@
   "index.html"
   [markup]
   [:link] (site-web-root :href)
-  [:.content] (content markup))
+  [:.design] (substitute markup))
 
 (defsnippet index-content
   "index.html" [:.index-content]
@@ -36,6 +36,14 @@
   [body]
   [(attr= :name "body")] (set-attr :value body))
 
+(defsnippet login-content
+  "index.html" [:.login-content]
+  [])
+
+(defsnippet register-content
+  "index.html" [:.register-content]
+  [])
+
 ;; Public
 ;; ------
 
@@ -48,4 +56,12 @@
   (layout
     (index-content
       (map first (db/puns)))))
+
+(defn login [req]
+  (layout
+    (login-content)))
+
+(defn register [req]
+  (layout
+    (register-content)))
 

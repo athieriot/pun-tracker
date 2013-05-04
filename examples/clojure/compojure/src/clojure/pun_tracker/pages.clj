@@ -19,18 +19,17 @@
                [:attrs attr]
                #(s/replace % "../../resources/public/" "/assets/"))))
 
-(defn- nothing [] identity)
+(defn remove-if [condition]
+  (if (condition)
+    identity
+    (substitute nil)))
 
 (deftemplate layout
   "index.html"
   [markup]
   [:link] (site-web-root :href)
-  [(attr? :data-logged-in)] (if (user)
-                                (nothing)
-                                (substitute nil))
-  [(attr? :data-logged-out)] (if (user)
-                                 (substitute nil)
-                                 (nothing))
+  [(attr? :data-logged-in)] (remove-if user)
+  [(attr? :data-logged-out)] (remove-if (complement user))
   [:.design] (substitute markup))
 
 (defsnippet index-content

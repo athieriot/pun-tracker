@@ -6,7 +6,7 @@
   (:require [pun-tracker.db :as db]
             [clojure.string :as s]))
 
-(declare flash-message)
+(declare flash-success)
 
 (def static-prefix "../../resources/public/")
 

@@ -15,11 +15,16 @@
 (defn pun-summary [pun]
   (fn [node]
     (at node
+        [:.user] (content (-> pun :pun/added-by :user/email))
         [:.delete] (set-attr :href
-                             (format "/puns/%s/destroy" (:db/id pun)))
+                             (format "/puns/%s/delete" (:db/id pun)))
         [:.vote] (set-attr :href
                            (format "/puns/%s/vote" (:db/id pun)))
-        [:.body] (content (:pun/body pun)))))
+        [:.body] (content (:pun/body pun))
+        [:.votes :span] (content (-> pun
+                                     :pun/votes
+                                     count
+                                     str)))))
 
 (defn- site-web-root [attr]
   (fn [node]

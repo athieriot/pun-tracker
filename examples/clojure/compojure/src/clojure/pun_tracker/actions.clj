@@ -1,5 +1,6 @@
 
 (ns pun-tracker.actions
+  (:use [pun-tracker.session :only [user-id]])
   (:require [datomic.api :as d]
             [pun-tracker.pages :as pages]
             [pun-tracker.db :as db]
@@ -8,12 +9,17 @@
 
 (defn- req-to-pun [{:keys [params]}]
   {:db/id (d/tempid :db.part/user)
-   :pun/body (:body params)})
+   :pun/body (:body params)
+   :pun/added-by (user-id)})
 
 (defn- req-to-user [{:keys [params]}]
   {:db/id (d/tempid :db.part/user)
    :user/email (:email params)
    :user/password (util/md5 (:password params))})
+
+(defn- req-to-eid [req]
+  (Long/parseLong
+    (-> req :params :eid)))
 
 (defn- go-home [msg]
   (-> (response/redirect "/")
@@ -31,12 +37,18 @@
 ;; ------
 
 (defn vote [req]
-  (go-home "Vote Cast"))
+  (let [eid (req-to-eid req)
+        tx [:db/add eid :pun/votes (user-id)]]
+    (d/transact @db/cnn [tx])
+    (go-home "Vote Cast")))
 
-(defn delete [req])
+(defn delete [req]
+  (let [eid (req-to-eid req)
+        tx [:db.fn/retractEntity eid]]
+    (d/transact @db/cnn [tx])
+    (go-home "Pun deleted")))
 
-(defn login [req]
-  (login* req))
+(def login login*)
 
 (defn logout [req]
   (-> (go-home "Logged out")

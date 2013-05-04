@@ -1,41 +1,51 @@
 
 (ns pun-tracker.db
-  (:use [datomic.api :only [q db] :as d])
+  (:use [datomic.api :only [q db] :as d]
+        [clojure.pprint :only [pprint]])
   (:require [pun-tracker.util :as util]))
 
 (def uri "datomic:mem://puntracker")
 
 (def cnn (atom nil))
 
-(def schema-tx
-  [; puns
+(def schema-tx [
+
+   ; puns
+
    {:db/id #db/id [:db.part/db]
     :db/ident :pun/body
     :db/valueType :db.type/string
     :db/cardinality :db.cardinality/one
     :db/fulltext true
     :db.install/_attribute :db.part/db}
+
    {:db/id #db/id [:db.part/db]
     :db/ident :pun/added-by
     :db/valueType :db.type/ref
     :db/cardinality :db.cardinality/one
     :db.install/_attribute :db.part/db}
+
    {:db/id #db/id [:db.part/db]
-    :db/ident :pun/voted-for-by
+    :db/ident :pun/votes
     :db/valueType :db.type/ref
     :db/cardinality :db.cardinality/many
     :db.install/_attribute :db.part/db}
+
    ; users
+
    {:db/id #db/id [:db.part/db]
     :db/ident :user/email
     :db/valueType :db.type/string
     :db/cardinality :db.cardinality/one
     :db.install/_attribute :db.part/db}
+
    {:db/id #db/id [:db.part/db]
     :db/ident :user/password
     :db/valueType :db.type/string
     :db/cardinality :db.cardinality/one
-    :db.install/_attribute :db.part/db} ])
+    :db.install/_attribute :db.part/db}
+
+  ])
 
 (def find-puns-tx
   '[:find ?e
@@ -58,6 +68,9 @@
 
 ;; Public
 ;; ------
+
+(defn latest []
+  (db @cnn))
 
 (defn user
   "Find a user by email and password"

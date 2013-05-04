@@ -18,6 +18,9 @@
 (defn user []
   *user*)
 
+(defn user-id []
+  (:db/id *user*))
+
 (defn wrap-user [handler]
   (fn [req]
     (binding [*user* (req-to-user req)]

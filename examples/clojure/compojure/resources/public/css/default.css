@@ -30,6 +30,14 @@
     padding: 10px;
 }
 
+.puns li .votes {
+    color: #555;
+}
+
+.puns li .user {
+    font-weight: bold;
+}
+
 .actions {
     display: none;
     float: right;

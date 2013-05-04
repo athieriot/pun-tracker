@@ -29,6 +29,10 @@
 (defn login [req]
   (login* req))
 
+(defn logout [req]
+  (-> (response/redirect "/")
+      (assoc :session {:eid nil})))
+
 (defn register [req]
   (let [user-tx (req-to-user req)]
     (d/transact @db/cnn [user-tx])

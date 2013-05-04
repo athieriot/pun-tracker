@@ -1,7 +1,8 @@
 
 (ns pun-tracker.pages
   (:use net.cgrand.enlive-html
-        [datomic.api :only [entity] :as d])
+        [datomic.api :only [entity] :as d]
+        [pun-tracker.session :only [user]])
   (:require [pun-tracker.db :as db]
             [clojure.string :as s]))
 
@@ -18,10 +19,18 @@
                [:attrs attr]
                #(s/replace % "../../resources/public/" "/assets/"))))
 
+(defn- nothing [] identity)
+
 (deftemplate layout
   "index.html"
   [markup]
   [:link] (site-web-root :href)
+  [(attr? :data-logged-in)] (if (user)
+                                (nothing)
+                                (substitute nil))
+  [(attr? :data-logged-out)] (if (user)
+                                 (substitute nil)
+                                 (nothing))
   [:.design] (substitute markup))
 
 (defsnippet index-content

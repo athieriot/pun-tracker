@@ -8,8 +8,3 @@
 (defn md5 [string]
   string)
 
-(defn wrap-debug [handler]
-  (fn [req]
-    (pprint req)
-    (handler req)))
-

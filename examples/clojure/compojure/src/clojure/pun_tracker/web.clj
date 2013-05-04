@@ -4,13 +4,13 @@
         [ring.middleware.reload :only [wrap-reload]]
         [ring.middleware.stacktrace :only [wrap-stacktrace]]
         [ring.adapter.jetty :only [run-jetty]]
-        [pun-tracker.util :only [wrap-debug]])
+        [pun-tracker.session :only [wrap-user]])
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [pun-tracker.pages :as pages]
             [pun-tracker.actions :as actions]))
 
-(defroutes app-routes
+(defroutes www-routes
   (GET "/" [] pages/index)
 
   (GET "/create" [] pages/create)
@@ -18,18 +18,23 @@
 
   (GET "/login" [] pages/login)
   (POST "/login" [] actions/login)
+  (GET "/logout" [] actions/logout)
 
   (GET "/register" [] pages/register)
   (POST "/register" [] actions/register)
 
   (route/resources "/assets"))
 
+(def app-routes
+  (routes
+    (wrap-user www-routes)
+    (route/not-found "404")))
+
 (def app
   (-> #'app-routes
-      (wrap-debug)
       (wrap-reload)
       (wrap-stacktrace)
-      (handler/site :session)))
+      (handler/site)))
 
 ;; Public
 ;; ------

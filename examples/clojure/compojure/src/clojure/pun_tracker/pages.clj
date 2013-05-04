@@ -64,6 +64,7 @@
   [req markup]
   [:body] (add-class (if (user) "logged-in" ""))
   [:link] (site-web-root :href)
+  [:script] (site-web-root :src)
   [:.design] (substitute markup)
   [:.container] (prepend (flash-message req)))
 

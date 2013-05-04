@@ -51,15 +51,6 @@
   '[:find ?e
     :where [?e :pun/body]])
 
-(def pun-body-matches
-  '[[pun-matches ?text ?e]
-    [(fulltext $ :pun/body ?text) [[?e]]]])
-
-(def find-puns-matching-tx
-  '[:find ?e
-    :in $ % ?text
-    :where (pun-matches ?text ?e)])
-
 (def find-user-tx
   '[:find ?e
     :in $ ?email ?pass
@@ -76,20 +67,14 @@
   "Find a user by email and password"
   [email pass]
   (let [res (q find-user-tx
-               (db @cnn)
+               (latest)
                email
                (util/md5 pass))]
     (ffirst res)))
 
 (defn puns []
   (q find-puns-tx
-     (db @cnn)))
-
-(defn puns-matching [text]
-  (q find-puns-matching-tx
-     (db @cnn)
-     [pun-body-matches]
-     text))
+     (latest)))
 
 (defn init []
   (d/create-database uri)

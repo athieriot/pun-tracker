@@ -4,9 +4,10 @@
         [ring.middleware.reload :only [wrap-reload]]
         [ring.middleware.stacktrace :only [wrap-stacktrace]]
         [ring.adapter.jetty :only [run-jetty]]
-        [pun-tracker.session :only [wrap-user]])
+        [pun-tracker.session :only [wrap-user user]])
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
+            [ring.util.response :as response]
             [pun-tracker.pages :as pages]
             [pun-tracker.actions :as actions]))
 
@@ -22,6 +23,9 @@
 
   (GET "/register" [] pages/register)
   (POST "/register" [] actions/register)
+
+  (GET "/puns/:eid/vote" [] actions/vote)
+  (GET "/puns/:eid/delete" [] actions/delete)
 
   (route/resources "/assets"))
 

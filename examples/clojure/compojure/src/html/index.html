@@ -12,16 +12,16 @@
             <div class="navbar-inner">
                 <a href="/" class="brand">Pun Tracker</a>
                 <ul class="nav">
-                    <li>
+                    <li class="add-pun">
                         <a href="/create">Add Pun</a>
                     </li>
-                    <li data-logged-out="true">
+                    <li class="register">
                         <a href="/register">Register</a>
                     </li>
-                    <li data-logged-out="true">
+                    <li class="login">
                         <a href="/login">Login</a>
                     </li>
-                    <li data-logged-in="true">
+                    <li class="logout">
                         <a href="/logout">Logout</a>
                     </li>
                 </ul>
@@ -32,6 +32,10 @@
 
             <div class="design">
 
+                <div class="alert alert-success">
+                    This is a successful flash message
+                </div>
+
                 <div class="row index-content">
                     <div class="span12">
 
@@ -39,7 +43,7 @@
 
                         <ul class="puns">
                             <li>
-                            <div class="actions">
+                                <div class="actions">
                                     <a href="#" class="vote">
                                         Vote
                                     </a>

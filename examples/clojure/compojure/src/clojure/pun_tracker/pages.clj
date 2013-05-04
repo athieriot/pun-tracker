@@ -6,31 +6,38 @@
   (:require [pun-tracker.db :as db]
             [clojure.string :as s]))
 
+(declare flash-message)
+
+(def static-prefix "../../resources/public/")
+
+(def live-prefix "/assets/")
+
 (defn pun-summary [pun]
   (fn [node]
     (at node
         [:.delete] (set-attr :href
                              (format "/puns/%s/destroy" (:db/id pun)))
+        [:.vote] (set-attr :href
+                           (format "/puns/%s/vote" (:db/id pun)))
         [:.body] (content (:pun/body pun)))))
 
 (defn- site-web-root [attr]
   (fn [node]
     (update-in node
                [:attrs attr]
-               #(s/replace % "../../resources/public/" "/assets/"))))
+               #(s/replace % static-prefix live-prefix))))
 
-(defn remove-if [condition]
-  (if (condition)
-    identity
-    (substitute nil)))
+(defn- flash-message [req]
+  (if-let [msg (:flash req)]
+    (flash-success msg)))
 
-(deftemplate layout
-  "index.html"
-  [markup]
-  [:link] (site-web-root :href)
-  [(attr? :data-logged-in)] (remove-if user)
-  [(attr? :data-logged-out)] (remove-if (complement user))
-  [:.design] (substitute markup))
+;; Templates and Snippets
+;; ----------------------
+
+(defsnippet flash-success
+  "index.html" [:.alert-success]
+  [msg]
+  [:*] (content msg))
 
 (defsnippet index-content
   "index.html" [:.index-content]
@@ -52,24 +59,32 @@
   "index.html" [:.register-content]
   [])
 
+(deftemplate layout
+  "index.html"
+  [req markup]
+  [:body] (add-class (if (user) "logged-in" ""))
+  [:link] (site-web-root :href)
+  [:.design] (substitute markup)
+  [:.container] (prepend (flash-message req)))
+
 ;; Public
 ;; ------
 
 (defn create [req]
-  (layout
+  (layout req
     (create-content
       (get-in req [:params :body]))))
 
 (defn index [req]
-  (layout
+  (layout req
     (index-content
       (map first (db/puns)))))
 
 (defn login [req]
-  (layout
+  (layout req
     (login-content)))
 
 (defn register [req]
-  (layout
+  (layout req
     (register-content)))
 

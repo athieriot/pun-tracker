@@ -1,4 +1,23 @@
 
+/*========= navigation ==========*/
+
+.add-pun,
+.logout {
+    display: none;
+}
+
+.logged-in .logout,
+.logged-in .add-pun {
+    display: block;
+}
+
+.logged-in .login,
+.logged-in .register {
+    display: none;
+}
+
+/*============ puns listing ===========*/
+
 .puns {
     list-style-type: none;
     margin: 0;
@@ -11,8 +30,13 @@
     padding: 10px;
 }
 
-.puns .actions {
+.actions {
+    display: none;
     float: right;
+}
+
+.logged-in .actions {
+    display: block;
 }
 
 /*======== design preview =========*/

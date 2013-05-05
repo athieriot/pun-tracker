@@ -4,7 +4,8 @@
         [ring.middleware.reload :only [wrap-reload]]
         [ring.middleware.stacktrace :only [wrap-stacktrace]]
         [ring.adapter.jetty :only [run-jetty]]
-        [pun-tracker.session :only [wrap-user user]])
+        [pun-tracker.session :only [wrap-user user]]
+        [pun-tracker.db :only [wrap-db]])
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [ring.util.response :as response]
@@ -38,6 +39,7 @@
 
 (def app
   (-> #'app-routes
+      (wrap-db)
       (wrap-reload)
       (wrap-stacktrace)
       (handler/site)))

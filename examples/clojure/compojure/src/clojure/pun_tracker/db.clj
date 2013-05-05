@@ -2,7 +2,8 @@
 (ns pun-tracker.db
   (:use [datomic.api :only [q db] :as d]
         [clojure.pprint :only [pprint]])
-  (:require [pun-tracker.util :as util]))
+  (:require [pun-tracker.util :as util])
+  (:import (java.text SimpleDateFormat)))
 
 (def uri "datomic:mem://puntracker")
 
@@ -79,8 +80,22 @@
     :where [?e :user/email ?email]
            [?e :user/password ?pass]])
 
+(defn ->date [ts]
+  (let [fmt "yyyy-MM-dd'T'HH:mm:ss"
+        df (SimpleDateFormat. fmt)]
+    (.parse df ts)))
+
 ;; Public
 ;; ------
+
+(defn wrap-db [handler]
+  (fn [req]
+    (if-let [ts (-> req :params :ts)]
+      (binding [*current* (d/as-of
+                            (d/db @cnn)
+                            (->date ts))]
+        (handler req))
+      (handler req))))
 
 (defn current []
   (if (nil? *current*)

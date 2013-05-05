@@ -42,20 +42,29 @@
                         <h2>Puns</h2>
 
                         <ul class="puns">
-                            <li>
-                                <div class="actions">
-                                    <a href="#" class="vote">Vote</a>
-                                    /
-                                    <a href="#" class="delete">Delete</a>
-                                </div>
+                            <li class="pun">
+
+                                <ul class="actions">
+                                    <li class="delete">
+                                        <a href="#">Delete</a>
+                                    </li>
+                                    <li class="vote">
+                                        <a href="#">Vote</a>
+                                    </li>
+                                </ul>
+
+                                <img class="image" alt="Pun Image" src="#" />
+
                                 <div>
                                     <span class="user">User</span>
                                     said:
                                     <span class="body">Pun Here</span>
                                 </div>
+
                                 <div class="votes">
                                     <span>4</span> votes
                                 </div>
+
                             </li>
                         </ul>
 
@@ -67,14 +76,14 @@
 
                         <h2>Add a Pun</h2>
 
-                        <form class="form-horizontal" method="post" action="/create">
+                        <form class="form-horizontal" method="post" action="/create" enctype="multipart/form-data">
 
                             <div class="control-group">
                                 <label class="control-label">
                                     Pun:
                                 </label>
                                 <div class="controls">
-                                    <input type="text" name="body" />
+                                    <input type="text" name="body" required="required" />
                                 </div>
                             </div>
 
@@ -83,7 +92,7 @@
                                     Image:
                                 </label>
                                 <div class="controls">
-                                    <input type="file" name="image" />
+                                    <input type="file" name="image" required="required" />
                                 </div>
                             </div>
 

@@ -31,6 +31,12 @@
     :db/cardinality :db.cardinality/many
     :db.install/_attribute :db.part/db}
 
+   {:db/id #db/id [:db.part/db]
+    :db/ident :pun/file
+    :db/valueType :db.type/ref
+    :db/cardinality :db.cardinality/one
+    :db.install/_attribute :db.part/db}
+
    ; users
 
    {:db/id #db/id [:db.part/db]
@@ -41,6 +47,20 @@
 
    {:db/id #db/id [:db.part/db]
     :db/ident :user/password
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db.install/_attribute :db.part/db}
+
+   ; files
+
+   {:db/id #db/id [:db.part/db]
+    :db/ident :file/path
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db.install/_attribute :db.part/db}
+
+   {:db/id #db/id [:db.part/db]
+    :db/ident :file/mimeType
     :db/valueType :db.type/string
     :db/cardinality :db.cardinality/one
     :db.install/_attribute :db.part/db}
@@ -62,6 +82,9 @@
 
 (defn latest []
   (db @cnn))
+
+(defn ->entity [eid]
+  (d/entity (latest) eid))
 
 (defn user
   "Find a user by email and password"

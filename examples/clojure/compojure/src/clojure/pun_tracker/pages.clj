@@ -1,8 +1,8 @@
 
 (ns pun-tracker.pages
   (:use net.cgrand.enlive-html
-        [datomic.api :only [entity] :as d]
-        [pun-tracker.session :only [user]])
+        [pun-tracker.session :only [user user-id]]
+        [pun-tracker.util :only [in?]])
   (:require [pun-tracker.db :as db]
             [clojure.string :as s]))
 
@@ -12,19 +12,9 @@
 
 (def live-prefix "/assets/")
 
-(defn pun-summary [pun]
-  (fn [node]
-    (at node
-        [:.user] (content (-> pun :pun/added-by :user/email))
-        [:.delete] (set-attr :href
-                             (format "/puns/%s/delete" (:db/id pun)))
-        [:.vote] (set-attr :href
-                           (format "/puns/%s/vote" (:db/id pun)))
-        [:.body] (content (:pun/body pun))
-        [:.votes :span] (content (-> pun
-                                     :pun/votes
-                                     count
-                                     str)))))
+(defn user-has-voted [pun]
+  (in? (map :db/id (:pun/votes pun))
+       (user-id)))
 
 (defn- site-web-root [attr]
   (fn [node]
@@ -36,8 +26,30 @@
   (if-let [msg (:flash req)]
     (flash-success msg)))
 
+(defn- file-url [file]
+  (format "/file/%s"
+          (:db/id file)))
+
 ;; Templates and Snippets
 ;; ----------------------
+
+(defsnippet pun-summary
+  "index.html" [:.puns :.pun]
+  [pun]
+  [:.user] (content (-> pun :pun/added-by :user/email))
+  [:.vote] (if (user-has-voted pun)
+             (substitute nil)
+             identity)
+  [:.image] (if (:pun/file pun)
+              (set-attr :src (file-url (:pun/file pun)))
+              (substitute nil))
+  [:.delete :a] (set-attr :href (format "/puns/%s/delete" (:db/id pun)))
+  [:.vote :a] (set-attr :href (format "/puns/%s/vote" (:db/id pun)))
+  [:.body] (content (:pun/body pun))
+  [:.votes :span] (content (-> pun
+                               :pun/votes
+                               count
+                               str)))
 
 (defsnippet flash-success
   "index.html" [:.alert-success]
@@ -47,9 +59,10 @@
 (defsnippet index-content
   "index.html" [:.index-content]
   [pun-eids]
-  [:.puns :li] (clone-for [eid pun-eids]
-                          (pun-summary
-                            (entity (d/db @db/cnn) eid))))
+  [:.puns] (content
+             (doall
+               (map (comp pun-summary db/->entity)
+                    pun-eids))))
 
 (defsnippet create-content
   "index.html" [:.create-content]

@@ -24,6 +24,8 @@
   (GET "/register" [] pages/register)
   (POST "/register" [] actions/register)
 
+  (GET "/file/:eid" [] actions/file)
+
   (GET "/puns/:eid/vote" [] actions/vote)
   (GET "/puns/:eid/delete" [] actions/delete)
 

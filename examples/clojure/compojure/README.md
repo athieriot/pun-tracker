@@ -23,3 +23,7 @@ being [Pedestal](http://pedestal.io/), but this application largely
 implements typical 'out of the box' functionality itself, using libraries
 where it makes sense.
 
+## Not Done
+
+- There's no validation.
+

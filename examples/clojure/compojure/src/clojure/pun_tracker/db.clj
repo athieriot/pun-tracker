@@ -8,6 +8,8 @@
 
 (def cnn (atom nil))
 
+(def ^:dynamic *current* nil)
+
 (def schema-tx [
 
    ; puns
@@ -80,24 +82,26 @@
 ;; Public
 ;; ------
 
-(defn latest []
-  (db @cnn))
+(defn current []
+  (if (nil? *current*)
+    (db @cnn)
+    *current*))
 
 (defn ->entity [eid]
-  (d/entity (latest) eid))
+  (d/entity (current) eid))
 
 (defn user
   "Find a user by email and password"
   [email pass]
   (let [res (q find-user-tx
-               (latest)
+               (current)
                email
                (util/md5 pass))]
     (ffirst res)))
 
 (defn puns []
   (q find-puns-tx
-     (latest)))
+     (current)))
 
 (defn init []
   (d/create-database uri)

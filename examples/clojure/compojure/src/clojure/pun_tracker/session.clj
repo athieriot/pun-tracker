@@ -9,7 +9,7 @@
 (defn- req-to-user [req]
   (if-let [eid (-> req :session :eid)]
     (d/entity
-      (db/latest)
+      (db/current)
       eid)))
 
 ;; Public

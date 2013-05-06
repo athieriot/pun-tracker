@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Pun Tracker</title>
+
+        <link rel="stylesheet" type="text/css" href="../../resources/public/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="../../resources/public/css/default.css" />
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <a href="/" class="brand">Pun Tracker</a>
+                <ul class="nav">
+                    <li class="add-pun">
+                        <a href="/create">Add Pun</a>
+                    </li>
+                    <li class="register">
+                        <a href="/register">Register</a>
+                    </li>
+                    <li class="login">
+                        <a href="/login">Login</a>
+                    </li>
+                    <li class="logout">
+                        <a href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="design">
+
+                <div class="alert alert-success">
+                    This is a successful flash message
+                </div>
+
+                <div class="row index-content">
+                    <div class="span12">
+
+                        <h2>Puns</h2>
+
+                        <ul class="puns">
+                            <li class="pun">
+
+                                <ul class="actions">
+                                    <li class="delete">
+                                        <a href="#">Delete</a>
+                                    </li>
+                                    <li class="vote">
+                                        <a href="#">Vote</a>
+                                    </li>
+                                </ul>
+
+                                <img class="image" alt="Pun Image" src="#" />
+
+                                <div>
+                                    <span class="user">User</span>
+                                    said:
+                                    <span class="body">Pun Here</span>
+                                </div>
+
+                                <div class="votes">
+                                    <span>4</span> votes
+                                </div>
+
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div class="row create-content">
+                    <div class="span8">
+
+                        <h2>Add a Pun</h2>
+
+                        <form class="form-horizontal" method="post" action="/create" enctype="multipart/form-data">
+
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Pun:
+                                </label>
+                                <div class="controls">
+                                    <input type="text" name="body" required="required" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Image:
+                                </label>
+                                <div class="controls">
+                                    <input type="file" name="image" required="required" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input type="submit" value="Add Pun" class="btn btn-primary" />
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="row login-content">
+                    <div class="span8">
+
+                        <h2>Logging In</h2>
+
+                        <p>If you have an account then enter your details below to log in.</p>
+
+                        <form class="form-horizontal" method="post" action="/login">
+
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Email:
+                                </label>
+                                <div class="controls">
+                                    <input type="text" name="email" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Password:
+                                </label>
+                                <div class="controls">
+                                    <input type="password" name="password" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input type="submit" value="Login" class="btn btn-primary" />
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                    <div class="span4">
+                        <h2>Signing Up!</h2>
+                        <p>If you don't have an account then
+                            you won't be able to vote, so sign up now!</p>
+                    </div>
+                </div>
+
+                <div class="row register-content">
+                    <div class="span12">
+
+                        <h2>Registering an Account</h2>
+
+                        <p>To register an account just fill in the form below.</p>
+
+                        <form class="form-horizontal" method="post" action="/register">
+
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Email:
+                                </label>
+                                <div class="controls">
+                                    <input type="text" name="email" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Password:
+                                </label>
+                                <div class="controls">
+                                    <input type="password" name="password" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input type="submit" value="Create Account" class="btn btn-primary" />
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <script type="text/javascript" src="../../resources/public/js/main.js"></script>
+    </body>
+</html>

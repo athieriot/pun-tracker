@@ -1,0 +1,4 @@
+.lein*
+target
+resources/images
+resources/public/js/main.js

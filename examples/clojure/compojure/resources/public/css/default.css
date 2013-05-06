@@ -1,0 +1,63 @@
+
+/*========= navigation ==========*/
+
+.add-pun,
+.logout {
+    display: none;
+}
+
+.logged-in .logout,
+.logged-in .add-pun {
+    display: block;
+}
+
+.logged-in .login,
+.logged-in .register {
+    display: none;
+}
+
+/*============ puns listing ===========*/
+
+.puns {
+    list-style-type: none;
+    margin: 0;
+}
+
+.puns .pun {
+    border: 1px #333 solid;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.puns .pun .votes {
+    color: #555;
+}
+
+.puns .pun .user {
+    font-weight: bold;
+}
+
+.actions {
+    display: none;
+    float: right;
+    margin: 0;
+    list-style-type: none;
+}
+
+.logged-in .actions {
+    display: block;
+}
+
+/*======== design preview =========*/
+
+.design .row {
+    border-top: 2px #222 solid;
+    margin: 40px 0 40px -20px;
+    padding: 20px 0 20px 0;
+}
+
+.design .actions {
+    display: block;
+}
+

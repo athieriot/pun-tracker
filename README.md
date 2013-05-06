@@ -55,12 +55,17 @@ Current examples
   <tr>
     <td>Ruby</td><td>Rails3</td><td>SQLite</td>
   </tr>
+  <tr>
+    <td>Clojure</td><td>Compojure</td><td>Datomic</td>
+  </tr>
 </table>
 
 Bugs
 ====
 
 - Play2: Slick don't like the "delete" keyword
+- Test Suite: Getting better at selectors
+- Need to have a consistent design
 
 Hacking
 =======
@@ -74,7 +79,7 @@ If it's the case, feel free to propose improvements!
 If not:
    - create a new branch (It will make the Pull Request easier)
    - Have fun
-   - Validate your application against the Casper suite by running ./run-tests -s server_address
+   - Validate your application against the Casper suite by running ./run-tests -s server-address
    - Push your code and create a Pull Request!
 
 Ideas
